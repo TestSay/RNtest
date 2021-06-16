@@ -18,11 +18,10 @@ const RegisterScreen = ({navigation}) => {
     })
   }, [navigation])
   const register =()=>{
-    auth
-    .createUserwithEmailAndPassword(email,password)
-    .then(authUser => {
-      authUser.user.update(
-        {displayName: name,
+    auth.createUserWithEmailAndPassword(email,password)
+    .then((authUser) => {
+      authUser.user.updateProfile({
+        displayName: name,
         photoURL: imageUrl ||
          'https://www.cyphercoders.com/sites/default/files/default_images/default-user-icon-4.jpg',
       })
@@ -56,7 +55,8 @@ const RegisterScreen = ({navigation}) => {
         <Input placeholder='Profile Picture Url (optional)'
          type='text'
          value={imageUrl}
-         onChangeText={(text)=> setImageUrl(text)}/>
+         onChangeText={(text)=> setImageUrl(text)}
+         onSubmitEditing={register}/>
 
       </View>
       <Button raised onPress={register} title='Register'/>
